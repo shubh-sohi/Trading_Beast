@@ -2,8 +2,6 @@ import MovingAverageFormula as MAF
 import Data as data
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-
 
 if __name__ == "__main__":
     plt.style.use("fivethirtyeight")
@@ -11,8 +9,15 @@ if __name__ == "__main__":
     data.generateCSV(stock)
 
     # store the data
-    stock_data = pd.read_csv(stock + ".csv")
+    stock_data = data.generate_pandas_data(stock + ".csv")
 
+    # sma for 30 days
+    sma30 = MAF.moving_average(30, stock_data)
+    #sma for 100 days
+    sma100 = MAF.moving_average(100, stock_data)
+
+    #combine data
+    combined_data = data.combine_data(sma30, sma100, stock_data, stock)
+    
     # visualize the data
-    plt.figure(figsize=(12.5, 4.5))
-    plt.plot(stock_data["Adj Close Price"])
+    MAF.visualize(combined_data, stock)
