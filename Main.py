@@ -18,6 +18,7 @@ if __name__ == "__main__":
 
     #combine data
     combined_data = data.combine_data(sma30, sma100, stock_data, stock)
-    
+
     # visualize the data
-    MAF.visualize(combined_data, stock)
+    plot = [True, True, True] # keeps track of the plots to be made in the order: [average, sma30, sma100]
+    MAF.visualize(combined_data, stock, plot)

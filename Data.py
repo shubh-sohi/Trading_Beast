@@ -10,7 +10,7 @@ def generateCSV(name):
     result = app.get_daily_adjusted('AAPL', outputsize='full')
     relevant_data = result[0]
     days_available = list(result[0].keys())
-    days_available = days_available[0:101]
+    # days_available = days_available[0:101]
 
     days_available.reverse()
 
@@ -28,6 +28,7 @@ def generate_pandas_data(filename):
 
 def combine_data(sma30, sma100, average, stock):
     data = pd.DataFrame()
+    data["date"] = average["date"]
     data[stock] = average["adjusted_close"]
     data["SMA30"] = sma30["adjusted_close"]
     data["SMA100"] = sma100["adjusted_close"]
