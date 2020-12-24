@@ -26,12 +26,19 @@ def generate_pandas_data(filename):
     os.remove(filename)
     return stock_data
 
-def combine_data(sma30, sma100, average, stock):
+def combine_data(sma30, sma100, average, stock, days):
     data = pd.DataFrame()
-    data["date"] = average["date"]
-    data[stock] = average["adjusted_close"]
-    data["SMA30"] = sma30["adjusted_close"]
-    data["SMA100"] = sma100["adjusted_close"]
+    if len(average) < days:
+        data["date"] = average["date"]
+        data[stock] = average["adjusted_close"]
+        data["SMA30"] = sma30["adjusted_close"]
+        data["SMA100"] = sma100["adjusted_close"]
+    else:
+        data["date"] = average["date"].tail(days)
+        data[stock] = average["adjusted_close"].tail(days)
+        data["SMA30"] = sma30["adjusted_close"].tail(days)
+        data["SMA100"] = sma100["adjusted_close"].tail(days)
+
     return data
 
 if __name__ == "__main__":

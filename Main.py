@@ -17,7 +17,8 @@ if __name__ == "__main__":
     sma100 = MAF.moving_average(100, stock_data)
 
     #combine data
-    combined_data = data.combine_data(sma30, sma100, stock_data, stock)
+    days = 365
+    combined_data = data.combine_data(sma30, sma100, stock_data, stock, days)
 
     # visualize the data
     plot = [True, True, True] # keeps track of the plots to be made in the order: [average, sma30, sma100]
